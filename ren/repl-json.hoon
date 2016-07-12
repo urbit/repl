@@ -1,4 +1,10 @@
 /=  gas  /$  fuel
+/=  cfg-enabled  /:/===/ren/repl-json/enabled:/!bean/
+::
+::::
+  ::
+?.  cfg-enabled
+  ~|(%repl-disabled !!)
 =+  wush=|=(a/tank (wash 0^160 a))
 =+  rolt=|=(a/wall [%s (role (turn a crip))])
 =+  exp=~|(%no-eval (~(got by qix.gas) %eval))
