@@ -21,16 +21,16 @@ var send = function(str,cb){
 }
 //var receive = function(elem, 
 
-var addRepl = function(contents,config){
-  return CodeMirror.fromTextArea(
-    $('<textarea>').text(contents).appendTo(addRepl.$container)[0],
+var addRepl = function(config){
+  return CodeMirror(
+    function(cm_elem){addRepl.$container.append(cm_elem)},
     config
   )
 }
 addRepl.$container = null;
 
 $.extend(CodeMirror.defaults,
-  {lineNumbers:true,autofocus:true,extraKeys:{Enter: "send"}}
+  {lineNumbers:true,extraKeys:{Enter: "send"}}
 )
 CodeMirror.commands.send = function(cm){
   var val = cm.getValue()
@@ -51,7 +51,7 @@ CodeMirror.commands.send = function(cm){
         throw new Error("Unknown result "+Object.keys(res))
     }
   })
-  addRepl("",{autofocus:true})
+  addRepl({autofocus:true})
 }
 
 window.tree.actions.registerComponent("repl", React.createClass({
@@ -62,7 +62,7 @@ window.tree.actions.registerComponent("repl", React.createClass({
   })},
   componentDidMount: function(){
     addRepl.$container = $(this.refs.self)
-    addRepl("(add 2 2)").execCommand("send")
+    addRepl({value:"(add 2 2)"}).execCommand("send")
   }
 }))
 
