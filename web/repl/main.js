@@ -1,6 +1,9 @@
 if(!window.tree.replOnce){
 window.tree.replOnce = true
 
+var LOCAL = true;
+var HOST = LOCAL ? "" : "https://repl-comet.urbit.org"
+
 window.util = window.util || {}
 window.util.urle = function(s){
   // neither escape nor encodeURIComponent get '*'
@@ -14,12 +17,11 @@ window.util.urle = function(s){
 }}).join('')};
 
 var send = function(str,cb){
-  $.getJSON("/.repl-json",
+  $.getJSON(HOST+"/.repl-json",
       // "now="+Date.now()+
       "eval="+window.util.urle(str),
     cb)
 }
-//var receive = function(elem, 
 
 var addRepl = function(config){
   return CodeMirror(
